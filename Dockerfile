@@ -8,6 +8,8 @@ RUN curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
         make \
         nodejs \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && curl -L https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz | tar -xz -C /usr/local/bin --strip 1 \
-    && mkdir -p ~/.docker && echo "{}" > ~/.docker/config.json
+    && curl -L https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz | tar -xz -C /usr/local/bin --strip 1
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["echo","-e","Example usage:\n\n\tdocker run --rm -it -e LOCAL_USER_ID=`id -u` -v `pwd`:/workdir -w /workdir contentwisetv/maven-node-docker-gosu mvn clean install\n"]
