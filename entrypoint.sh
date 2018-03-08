@@ -10,4 +10,5 @@ useradd --shell /bin/bash -u $USER_ID -o -c "" -M -d $HOME user
 
 chown user:user $HOME
 
-exec /usr/local/bin/gosu user bash -c "mkdir -p /home/user/.docker && echo '{}' > /home/user/.docker/config.json && $@"
+/usr/local/bin/gosu user bash -c "mkdir -p /home/user/.docker && echo '{}' > /home/user/.docker/config.json"
+exec /usr/local/bin/gosu user "$@"
